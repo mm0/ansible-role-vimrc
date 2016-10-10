@@ -1,0 +1,55 @@
+vim_config:
+  - syntax on
+  - set nu
+  - filetype plugin on
+  - filetype indent on
+  - set smarttab
+  - colorscheme ir_black
+  - set ai "Auto indent
+  - set si "Smart indent
+  - set wrap "Wrap lines
+  - set shiftwidth=4
+  - set modelines=5
+  - set tabstop=4
+  - set viminfo^=%
+  - set laststatus=2
+  - set statusline+=%F
+  - set statusline+=%m%r%h\ %w\ \ 
+  - |
+    set statusline+=CWD:\ %r%{getcwd()}
+  - |
+    set statusline+=%h\ \ \ Line:\ %l\ \ Col:\ %c 
+  - set statusline+=\ \ %P
+  - set statusline+=\ \ %-14.(%l,%c%V%)\ %<%P
+  #- set statusline+=\ \ {%{v:servername}}
+  - set autoread
+  - set history=700
+  - set cmdheight=2
+  - set backspace=eol,start,indent
+  - set whichwrap+=<,>,h,l
+  - set smartcase
+  - set ignorecase
+  - set hlsearch
+  - set magic
+  - set showmatch
+  - set mat=2
+  - set ffs=unix,dos,mac
+  - set encoding=utf8
+  - set background=dark
+  - let g:sqlutil_load_default_maps = 0 
+  - hi Search ctermbg=Green ctermfg=Black 
+  - set ff=unix ts=2 sw=2 ai expandtab
+  - au BufNewFile,BufRead *.yaml,*.yml so /etc/vim/plugin/yaml.vim
+  - set runtimepath+=/etc/vim/
+  - nmap <F12> :set invnumber<CR>
+  - nmap <F11> :set invpaste <CR>
+
+
+#  - |
+#    function! HasPaste()
+#    if &paste
+#    return 'PASTE MODE  '
+#    en
+#    return ''
+#    endfunction
+#  - set statusline=\ %{HasPaste()}

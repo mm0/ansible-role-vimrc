@@ -1,0 +1,27 @@
+
+  - name: Ensure system-wide vim config only so users can set own preferences 
+    lineinfile: 
+      line: |
+        {{ item }}
+      dest: {{ vimrc_root_directory}}/vimrc 
+      owner: root 
+      group: root 
+      mode: 644
+    become: yes
+    with_items: "{{ vim_config }}"
+
+  - name: Ensure Vim Plugin directory exists
+    file: path={{ vimrc_root_directory}} state=directory owner=root group=root
+    become: yes
+
+  - name: create archive for vimRC Plugin files
+    local_action: shell chdir={{ role_path }}/files/vim tar cvfz ../../../../roles/vim/files/vimfiles.tgz *;
+    become: no
+
+  - name: Copy VimRC Plugins
+    unarchive: src=vimfiles.tgz  dest=/etc/vim 
+    become: yes
+
+  - name: Ensure Vim Plugin Permissions
+    file: path={{ vimrc_root_directory}} state=directory owner=root group=root recurse=yes
+    become: yes
