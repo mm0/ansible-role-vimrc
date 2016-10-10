@@ -3,7 +3,7 @@
     lineinfile: 
       line: |
         {{ item }}
-      dest: {{ vimrc_root_directory}}/vimrc 
+      dest: "{{ vimrc_root_directory}}/vimrc"
       owner: root 
       group: root 
       mode: 644
