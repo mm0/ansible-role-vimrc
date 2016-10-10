@@ -15,11 +15,15 @@
     become: yes
 
   - name: create archive for vimRC Plugin files
-    local_action: shell chdir={{ role_path }}/files/vim tar cvfz ../../../../roles/vim/files/vimfiles.tgz *;
+    local_action: shell chdir={{ roles_path }}/vimrc/files/ tar cvfz vimfiles.tgz vim/files/*;
+    become: no
+
+  - name: create archive for vimRC Plugin files
+    local_action: shell chdir={{ roles_path }}/ ls -la
     become: no
 
   - name: Copy VimRC Plugins
-    unarchive: src=vimfiles.tgz  dest=/etc/vim 
+    unarchive: src="{{ roles_path }}/vimrc/files/vimfiles.tgz" dest="{{ vimrc_root_directory }}"
     become: yes
 
   - name: Ensure Vim Plugin Permissions
