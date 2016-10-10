@@ -15,11 +15,11 @@
     become: yes
 
   - name: create archive for vimRC Plugin files
-    local_action: shell chdir={{ role_path }}/vimrc/files/ tar cvfz vimfiles.tgz vim/files/*;
+    local_action: shell chdir={{ role_path }}/ ls -la
     become: no
 
   - name: create archive for vimRC Plugin files
-    local_action: shell chdir={{ role_path }}/ ls -la
+    local_action: shell chdir={{ role_path }}/vimrc/files/ tar cvfz vimfiles.tgz vim/files/*;
     become: no
 
   - name: Copy VimRC Plugins
