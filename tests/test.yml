@@ -3,5 +3,6 @@
   - vimrc_directory: /tmp/vim
   pre_tasks:
   - file: state=touch dest={{ vimrc_directory }} 
+  - file: state=touch dest={{ vimrc_directory }}/vimrc
   roles:
   - { role: ansible-role-vimrc, vimrc_root_directory: "{{ vimrc_directory }}" }
