@@ -1,9 +1,11 @@
 
   - name: Ensure system-wide vim config only so users can set own preferences 
-    template: src=vimrc.j2 dest=/etc/vim/vimrc
-    owner: root 
-    group: root 
-    mode: 644
+    template: 
+      src: vimrc.j2 
+      dest: /etc/vim/vimrc
+      owner: root 
+      group: root 
+      mode: 644
     become: yes
 
   - name: Ensure Vim Plugin directory exists
