@@ -1,14 +1,10 @@
 
   - name: Ensure system-wide vim config only so users can set own preferences 
-    lineinfile: 
-      line: |
-        {{ item }}
-      dest: "{{ vimrc_root_directory}}/vimrc"
-      owner: root 
-      group: root 
-      mode: 644
+    template: src=vimrc.j2 dest=/etc/vim/vimrc
+    owner: root 
+    group: root 
+    mode: 644
     become: yes
-    with_items: "{{ vim_config }}"
 
   - name: Ensure Vim Plugin directory exists
     file: path={{ vimrc_root_directory}} state=directory owner=root group=root
