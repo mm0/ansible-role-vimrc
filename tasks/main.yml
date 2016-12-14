@@ -27,7 +27,7 @@
       rsync_opts:
         - "--no-motd"
         - "--size-only"
-    become: "{% if ansible_connection is defined && ansible_connection == 'ssh' %}no{% else %}yes{% endif %}"
+    become: "{% if (ansible_connection is defined) and (ansible_connection == 'ssh') %}no{% else %}yes{% endif %}"
 
 #  - name: Ensure Vim Plugin Permissions
 #    file: path={{ vimrc_root_directory}} state=directory owner=root group=root recurse=yes
