@@ -2,7 +2,7 @@
   - name: Ensure system-wide vim config only so users can set own preferences 
     template: 
       src: vimrc.j2 
-      dest: /etc/vim/vimrc
+      dest: "{{vimrc_root_directory}}/vimrc"
       owner: root 
       group: root 
       mode: 644
@@ -12,14 +12,22 @@
     file: path={{ vimrc_root_directory}} state=directory owner=root group=root
     become: yes
 
-  - name: create archive for vimRC Plugin files
-    local_action: shell chdir={{ role_path }}/files/ tar  -C ./vim -cvzf vimfiles.tgz .;
+  - name: Synchronize default with root dir
+    synchronize: 
+      src: "{{ role_path }}/files/vim/"
+      dest: "{{ vimrc_root_directory }}"
+      rsync_path: "sudo rsync"
+      recursive: yes
+      compress: yes
+      perms: no
+      owner: no
+      group: no
+      times: no
+      use_ssh_args: yes
+      rsync_opts:
+        - "--no-motd"
     become: no
 
-  - name: Copy VimRC Plugins
-    unarchive: src="{{ role_path }}/files/vimfiles.tgz" dest="{{ vimrc_root_directory }}/"
-    become: yes
-
-  - name: Ensure Vim Plugin Permissions
-    file: path={{ vimrc_root_directory}} state=directory owner=root group=root recurse=yes
-    become: yes
+#  - name: Ensure Vim Plugin Permissions
+#    file: path={{ vimrc_root_directory}} state=directory owner=root group=root recurse=yes
+#    become: yes
