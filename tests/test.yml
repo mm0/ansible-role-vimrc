@@ -1,6 +1,6 @@
 - hosts: all
   vars: 
-  - vimrc_directory: /tmp/vim
+  - vimrc_directory: /etc/vim
   pre_tasks:
   - file: state=directory dest={{ vimrc_directory }} 
   - file: state=touch dest={{ vimrc_directory }}/vimrc
